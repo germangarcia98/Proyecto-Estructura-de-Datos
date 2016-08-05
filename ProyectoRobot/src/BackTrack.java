@@ -59,12 +59,12 @@ public class BackTrack {
         } else {
             if (this.Path.getNodoActual() instanceof NodoChoice){                   //Si primer nodo es Nodo de bifurcacion, dependiendo tipo de ramificacion a seguir realizar accion (Nodo Left: girar izquierda, NodoRight: girar derecha, NodoFront: avanzar hacia adelante
                 NodoChoice nodoChoice = (NodoChoice) this.Path.getNodoActual();     
-                if (nodoChoice.isStateLeft()){                              //Si existe ramificacion a la izquierda
-                    this.Path.setNodoActual(nodoChoice.getNodoLeft());      //Nodo actual es nodo de cruce a izquierda
-                    this.Robot.turnLeft();                                  //Robot gira a la izquierda
-                } else if (nodoChoice.isStateRight()){                      //Si existe ramificacion a la derecha
+                if (nodoChoice.isStateRight()){                             //Si existe ramificacion a la derecha
                     this.Path.setNodoActual(nodoChoice.getNodoRight());     //Nodo actual es nodo de cruce a derecha
                     this.Robot.turnRight();                                 //Robot gira a la derecha
+                } else if (nodoChoice.isStateLeft()){                       //Si existe ramificacion a la izquierda
+                    this.Path.setNodoActual(nodoChoice.getNodoLeft());      //Nodo actual es nodo de cruce a izquierda
+                    this.Robot.turnLeft();                                  //Robot gira a la izquierda
                 } else if (nodoChoice.isStateFront()){                      //Si existe ramificacion hacia enfrente
                     this.Path.setNodoActual(nodoChoice.getNodoFront());     //Nodo actual es nodo de avance frontal
                     this.Robot.move(state);                                 //Robot toma paso hacia entrente
@@ -134,20 +134,20 @@ public class BackTrack {
                 //Si nuevo nodo actual es un nodo de bifurcacion
                 if (this.Path.getNodoActual() instanceof NodoChoice){
                     NodoChoice nodoChoice = (NodoChoice) this.Path.getNodoActual();
-                    if (nodoChoice.isStateLeft()){                              //Si ramificacion izquierda de nodo de bifurcacion esta activada
-                        this.Path.setNodoActual(nodoChoice.getNodoLeft());      //Nuevo nodo actual es nodo de cruce izquierda
-                        this.Robot.setNextStep("left");                         //Cambiar a camino izquierdo correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
-                        this.Robot.turnLeft();                                  //Robot gira a la izquierda
-                        //System.out.println("L");
-                        state = true;                                           //State cambia de nuevo a avance frontal
-                        break;                                                  //TERMINA CICLO DE RETROCESO-----------
-                    } else if (nodoChoice.isStateRight()){                      //Si ramificacion derecha de nodo de bifurcacion esta activada
+                    if (nodoChoice.isStateRight()){                             //Si ramificacion derecha de nodo de bifurcacion esta activada
                         this.Path.setNodoActual(nodoChoice.getNodoRight());     //Nuevo nodo actual es nodo de cruce derecha
                         this.Robot.setNextStep("right");                        //Cambiar a camino derecho correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
                         this.Robot.turnRight();                                 //Robot gira a la derecha
                         //System.out.println("R");
                         state = true;                                           //State cambia de nuevo a avance frontal
                         break;                                                  //TERMINA CICLO DE RETROCESO------------
+                    } else if (nodoChoice.isStateLeft()){                       //Si ramificacion izquierda de nodo de bifurcacion esta activada
+                        this.Path.setNodoActual(nodoChoice.getNodoLeft());      //Nuevo nodo actual es nodo de cruce izquierda
+                        this.Robot.setNextStep("left");                         //Cambiar a camino izquierdo correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
+                        this.Robot.turnLeft();                                  //Robot gira a la izquierda
+                        //System.out.println("L");
+                        state = true;                                           //State cambia de nuevo a avance frontal
+                        break;                                                  //TERMINA CICLO DE RETROCESO-----------
                     } else if (nodoChoice.isStateFront()){                      //Si ramificacion frontal de nodo de bifurcacion esta activada
                         this.Path.setNodoActual(nodoChoice.getNodoFront());     //Nuevo nodo actual es nodo de avance frontal
                         this.Robot.setNextStep("front");                        //Cambiar a camino frontal correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
