@@ -176,14 +176,14 @@ public class BackTrack {
             if (this.Path.getNodoActual() instanceof NodoChoice){
                 this.Robot.changeHeadStep();                                    //Realizar cambio de camino principal de laberinto donde se encuentra robot
                 NodoChoice nodoChoice = (NodoChoice) this.Path.getNodoActual();
-                if (nodoChoice.isStateLeft()){                                  //Si ramificacion izquierda de nodo de bifurcacion esta activada
-                    this.Path.setNodoActual(nodoChoice.getNodoLeft());          //Nuevo nodo actual es nodo de cruce izquierda
-                    this.Robot.setNextStep("left");                             //Cambiar a camino izquierdo correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
-                    this.Robot.turnLeft();                                      //Robot gira a la izquierda----------
-                } else if (nodoChoice.isStateRight()){                          //Si ramificacion derecha de nodo de bifurcacion esta activada
+                if (nodoChoice.isStateRight()){                                 //Si ramificacion derecha de nodo de bifurcacion esta activada
                     this.Path.setNodoActual(nodoChoice.getNodoRight());         //Nuevo nodo actual es nodo de cruce derecha
                     this.Robot.setNextStep("right");                            //Cambiar a camino derecho correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
                     this.Robot.turnRight();                                     //Robot gira a la derecha------------
+                } else if (nodoChoice.isStateLeft()){                           //Si ramificacion izquierda de nodo de bifurcacion esta activada
+                    this.Path.setNodoActual(nodoChoice.getNodoLeft());          //Nuevo nodo actual es nodo de cruce izquierda
+                    this.Robot.setNextStep("left");                             //Cambiar a camino izquierdo correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
+                    this.Robot.turnLeft();                                      //Robot gira a la izquierda----------
                 } else if (nodoChoice.isStateFront()){                          //Si ramificacion frontal de nodo de bifurcacion esta activada
                     this.Path.setNodoActual(nodoChoice.getNodoFront());         //Nuevo nodo actual es nodo de avance frontal
                     this.Robot.setNextStep("front");                            //Cambiar a camino frontal correspondiente en la secuencia de laberinto. ESTO NO SE UTILIZARA EN FASE NO.2
